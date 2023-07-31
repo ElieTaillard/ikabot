@@ -13,6 +13,7 @@ env:
 
 jobs:
   build-and-push-image:
+    name: Build and Publish Docker Image
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -22,6 +23,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # The repository name must be in lower case in order to be pushed to the registry
       - name: Set lower case owner name
         run: |
           echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
