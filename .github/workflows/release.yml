@@ -134,7 +134,6 @@ jobs:
     uses: ./.github/workflows/publish_docker.yml
     with:
       tag_name: 'v${{ inputs.milestone }}'
-      islatest: true
     permissions:
       contents: read
       packages: write

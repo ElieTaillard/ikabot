@@ -6,10 +6,6 @@ on:
       tag_name:
         required: true
         type: string
-      isLatest:
-        required: true
-        type: boolean
-        default: true
 
 env:
   REGISTRY: ghcr.io
@@ -33,17 +29,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.tag_name }}
-          flavor: latest=${{ inputs.isLatest }}
+      - name: Build Docker image
+        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.tag_name }} .
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+      - name: Push Docker image
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.tag_name }}
