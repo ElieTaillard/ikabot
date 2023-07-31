@@ -27,7 +27,7 @@ jobs:
         id: repo_slug
         with:
           result-encoding: string
-          script: return `${ env.REGISTRY }/${github.repository.toLowerCase()}`
+          script: return `${{ env.REGISTRY }}/${github.repository.toLowerCase()}`
 
       - name: Log in to the Container registry
         uses: docker/login-action@v2
