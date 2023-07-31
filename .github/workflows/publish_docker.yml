@@ -40,5 +40,5 @@ jobs:
         with:
           push: true
           tags: |
-            ${{ env.OWNER_LC }}/${{ env.IMAGE_NAME }}:${{ inputs.tag_name }}
-            ${{ env.OWNER_LC }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/${{ env.OWNER_LC }}/${{ env.IMAGE_NAME }}:${{ inputs.tag_name }}
+            ${{ env.REGISTRY }}/${{ env.OWNER_LC }}/${{ env.IMAGE_NAME }}:latest
