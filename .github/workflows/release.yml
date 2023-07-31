@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       milestone:
-        description: 'The milestone to generate a release for'
+        description: 'The milestone to generate a release for (ex: 10.0.1)'
         required: true
         type: string
 
@@ -132,3 +132,9 @@ jobs:
     needs: [publish_release]
     name: Publish Docker Image
     uses: ./.github/workflows/publish_docker.yml
+    with:
+      tag_name: 'v${{ inputs.milestone }}'
+      islatest: true
+    permissions:
+      contents: read
+      packages: write

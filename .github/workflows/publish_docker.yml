@@ -2,6 +2,14 @@ name: Publish Docker Image
 
 on:
   workflow_call:
+    inputs:
+      tag_name:
+        required: true
+        type: string
+      isLatest:
+        required: true
+        type: boolean
+        default: true
 
 env:
   REGISTRY: ghcr.io
@@ -29,7 +37,8 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.tag_name }}
+          flavor: latest=${{ inputs.isLatest }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
