@@ -1,0 +1,9 @@
+name: Publish Docker Image Manually
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish_docker:
+    name: Publish Docker Image
+    uses: ./.github/workflows/publish_docker.yml
