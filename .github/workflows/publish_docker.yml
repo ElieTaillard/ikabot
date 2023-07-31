@@ -28,9 +28,9 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build Docker image
-        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.tag_name }} .
-
-      - name: Push Docker image
-        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.tag_name }}
+      
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.tag_name }}, ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
