@@ -22,10 +22,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Format repo slug
+        uses: actions/github-script@v4
+        id: repo_slug
+        with:
+          result-encoding: string
+          script: return `${ env.REGISTRY }/${github.repository.toLowerCase()}`
+
       - name: Log in to the Container registry
         uses: docker/login-action@v2
         with:
-          registry: ${{ env.REGISTRY }}
+          registry: ${{ steps.repo_slug.outputs.result }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       
@@ -34,5 +41,5 @@ jobs:
         with:
           push: true
           tags: |
-            ${{ env.IMAGE_NAME }}:'${{ inputs.tag_name }}'
-            ${{ env.IMAGE_NAME }}:latest
+            ${{ steps.repo_slug.outputs.result }}/${{ env.IMAGE_NAME }}:${{ inputs.tag_name }}
+            ${{ steps.repo_slug.outputs.result }}/${{ env.IMAGE_NAME }}:latest
