@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       milestone:
-        description: 'The milestone to generate a release for (ex: 10.0.1)'
+        description: 'The milestone to generate a release for (ex: 6.5.1)'
         required: true
         type: string
 
