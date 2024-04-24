@@ -8,9 +8,8 @@ on:
 
 jobs:
   build-and-pypi-publish:
-
     runs-on: ubuntu-latest
-    
+
     permissions:
       contents: read
       id-token: write
@@ -32,8 +31,6 @@ jobs:
       run: python -m build
 
     - name: Publish package
-      uses: pypa/gh-action-pypi-publish@v1.8.14
+      uses: pypa/gh-action-pypi-publish@release/v1
       with:
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
         repository-url: https://test.pypi.org/legacy/
