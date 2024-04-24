@@ -9,7 +9,9 @@ on:
 jobs:
   build-and-pypi-publish:
     runs-on: ubuntu-latest
-
+    environment:
+      name: testpypi
+      url: https://testpypi.org/p/ikabot-fork
     permissions:
       contents: read
       id-token: write
