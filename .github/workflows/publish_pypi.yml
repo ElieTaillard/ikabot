@@ -2,13 +2,16 @@ name: Publish Python Package
 
 on:
   workflow_call:
+    secrets:
+      PYPI_API_TOKEN:
+        required: true
+
+permissions:
+  contents: read
 
 jobs:
   build-and-pypi-publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
 
     steps:
     - uses: actions/checkout@v3
