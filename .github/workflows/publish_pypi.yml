@@ -12,6 +12,9 @@ permissions:
 jobs:
   build-and-pypi-publish:
     runs-on: ubuntu-latest
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/ikabot-fork
 
     steps:
     - uses: actions/checkout@v3
