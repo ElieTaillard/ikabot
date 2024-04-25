@@ -3,7 +3,7 @@ import setuptools
 from ikabot.config import IKABOT_VERSION
 
 setuptools.setup(
-    name="ikabot",
+    name="ikabot-fork",
     version=IKABOT_VERSION,
     author="physics-sp",
     author_email="physics-sp@protonmail.com",
